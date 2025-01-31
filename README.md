@@ -1,43 +1,101 @@
 # CryptoTracker
+CryptoTracker é uma gem Ruby que permite consultar o preço atual e o histórico de preços de qualquer criptomoeda suportada pela API CoinGecko. Os valores podem ser retornados em reais (BRL) ou dólares (USD).
 
-TODO: Delete this and the text below, and describe your gem
+## 📌 Funcionalidades
+- Obtenha o preço atual de qualquer criptomoeda;
+- Consulte o histórico de preços dos últimos 7, 30, 90 ou mais dias;
+- Suporte para diferentes moedas (BRL e USD);
+- Integração com a API da CoinGecko (Plano Gratuito).
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/crypto_tracker`. To experiment with that code, run `bin/console` for an interactive prompt.
+## 🛠️ Stack
+- Ruby 3.4.1;
+- Faraday para requisições HTTP;
+- CoinGecko API como fonte de dados.
 
-## Installation
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+## 📦 Instalação
+Adicione a seguinte linha ao seu `Gemfile`:
+```ruby
+# Gemfile
+gem 'crypto_tracker'
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
-
+Depois, execute:
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle install
 ```
 
-## Usage
+Ou instale manualmente:
+```bash
+gem install crypto_tracker
+```
 
-TODO: Write usage instructions here
+## 🚀 Como Usar
+Primeiro, carregue a gem no seu código:
+```bash
+require 'crypto_tracker'
+```
+### 🔹 Obter o preço atual
+```bash
+CryptoTracker.price("bitcoin", "brl")  # Preço atual do Bitcoin em BRL
+CryptoTracker.price("ethereum", "usd") # Preço atual do Ethereum em USD
+```
 
-## Development
+📌 Exemplo de resposta:
+```json
+{ "coin": "bitcoin", "price": 350000, "currency": "brl", "timestamp": "2025-01-30T14:00:00Z" }
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### 🔹 Obter o histórico de preços
+```bash
+CryptoTracker.history("bitcoin", 7, "usd")   # Histórico do bitcoin nos últimos 7 dias em USD
+CryptoTracker.history("ethereum", 30, "brl") # Histórico do ethereum nos últimos 30 dias em BRL
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+📌 Exemplo de resposta:
+```json
+[
+  { "timestamp": "2025-01-23T14:00:00Z", "price": 34000 },
+  { "timestamp": "2025-01-24T14:00:00Z", "price": 34500 },
+  { "timestamp": "2025-01-25T14:00:00Z", "price": 35000 }
+]
+```
 
-## Contributing
+## ⏳ Rate Limit da API CoinGecko
+A gem CryptoTracker está configurada para usar o plano gratuito da API CoinGecko. Isso significa que há um limite de:
+- 30 chamadas por minuto;
+- Máximo de 10.000 chamadas por mês.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/crypto_tracker. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/crypto_tracker/blob/main/CODE_OF_CONDUCT.md).
+Se você ultrapassar esses limites, a API pode bloquear temporariamente as requisições. Para um uso mais intensivo, considere um plano pago da CoinGecko ([mais detalhes aqui](https://www.coingecko.com/en/api/pricing?utm_source=chatgpt.com)).
 
-## License
+## 🛠️ Desenvolvimento
+Se quiser modificar a gem, clone o repositório e instale as dependências:
+```bash
+git clone git@github.com:davide-almeida/crypto_tracker.git
+cd crypto_tracker
+bundle install
+```
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+### 🔹 Testar a gem localmente
+Dentro do projeto, execute:
+```bash
+irb -I lib -r "crypto_tracker"
+```
 
-## Code of Conduct
+E teste os métodos:
+```bash
+CryptoTracker.price("bitcoin", "usd")
+CryptoTracker.history("ethereum", 7, "brl")
+```
 
-Everyone interacting in the CryptoTracker project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/crypto_tracker/blob/main/CODE_OF_CONDUCT.md).
+Você também pode usar alguns alias do `Makefile` para testes no IRB ou Rails Console:
+| Comando | Descrição |
+|-|-|
+| make build | remove arquivos `.gem` (caso existam) e gera um novo `.gem` |
+| make install | instala a gem localmente |
+| make uninstall | desinstala a gem localmente |
+
+## 📜 Licença
+Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](https://github.com/davide-almeida/crypto_tracker/blob/main/LICENSE.txt) para mais detalhes.
+
+## 🤝 Contribuição
+Se você encontrar bugs ou quiser sugerir melhorias, sinta-se à vontade para abrir um Issue ou enviar um Pull Request. 😊
