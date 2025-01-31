@@ -3,7 +3,6 @@ PATH
   specs:
     crypto_tracker (0.1.0)
       faraday (~> 2.12)
-      json
 
 GEM
   remote: https://rubygems.org/
