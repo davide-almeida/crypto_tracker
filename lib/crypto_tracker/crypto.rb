@@ -13,9 +13,9 @@ module CryptoTracker
 
     def current_price
       response = Client.get("coins/#{coin}")
-      price = response.dig("market_data", "current_price", currency)
+      price = response.dig('market_data', 'current_price', currency)
 
-      return { error: "Preço não disponível" } unless price
+      return { error: 'Preço não disponível' } unless price
 
       { coin: coin, price: price, currency: currency, timestamp: Time.now }
     end
@@ -23,9 +23,9 @@ module CryptoTracker
     def price_history(days)
       response = Client.get("coins/#{coin}/market_chart", { vs_currency: currency, days: days })
 
-      return { error: "Histórico não disponível" } unless response["prices"]
+      return { error: 'Histórico não disponível' } unless response['prices']
 
-      response["prices"].map do |price_data|
+      response['prices'].map do |price_data|
         { timestamp: Time.at(price_data[0] / 1000), price: price_data[1] }
       end
     end
@@ -40,7 +40,7 @@ module CryptoTracker
       return if CryptoTracker::SUPPORTED_CURRENCIES.include?(currency)
 
       raise ArgumentError,
-            "Moeda '#{currency}' não é suportada. Opções: #{CryptoTracker::SUPPORTED_CURRENCIES.join(', ')}"
+            "Moeda '#{currency}' não é suportada. Opções: #{CryptoTracker::SUPPORTED_CURRENCIES.join(", ")}"
     end
   end
 end
