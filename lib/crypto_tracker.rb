@@ -17,7 +17,11 @@ module CryptoTracker
 
   def self.supported_coins
     response = Client.get("coins/list")
-    return [] if response.is_a?(Hash) && response.key?("error")
+
+    unless response.is_a?(Array)
+      puts "Erro ao buscar criptomoedas: #{response}"
+      return []
+    end
 
     response.map { |coin| coin["id"] }
   end
