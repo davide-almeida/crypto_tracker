@@ -1,12 +1,18 @@
 AllCops:
   TargetRubyVersion: 3.1
   NewCops: disable
+  SuggestExtensions: false
 
 Style/StringLiterals:
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
 
 Style/StringLiteralsInInterpolation:
-  EnforcedStyle: single_quotes
+  EnforcedStyle: double_quotes
 
 Style/Documentation:
   Enabled: false
+
+Metrics/BlockLength:
+  Max: 40
+  Exclude:
+    - "spec/**/*"
