@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "crypto_tracker/version"
-require_relative "crypto_tracker/client"
-require_relative "crypto_tracker/crypto"
+require "crypto_tracker/version"
+require "crypto_tracker/client"
+require "crypto_tracker/crypto"
 
 module CryptoTracker
   SUPPORTED_CURRENCIES = %w[usd brl].freeze

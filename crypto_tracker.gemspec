@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "lib/crypto_tracker/version"
+require "./lib/crypto_tracker/version"
 
 Gem::Specification.new do |spec|
   spec.name = "crypto_tracker"
