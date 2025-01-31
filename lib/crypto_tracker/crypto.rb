@@ -33,8 +33,8 @@ module CryptoTracker
     private
 
     def validate_inputs
-      unless CryptoTracker::SUPPORTED_COINS.include?(coin)
-        raise ArgumentError, "Moeda '#{coin}' não é suportada. Opções: #{CryptoTracker::SUPPORTED_COINS.join(', ')}"
+      unless CryptoTracker.supported_coins.include?(coin)
+        raise ArgumentError, "Moeda '#{coin}' não é suportada pela API CoinGecko."
       end
 
       unless CryptoTracker::SUPPORTED_CURRENCIES.include?(currency)

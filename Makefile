@@ -3,3 +3,6 @@ build:
 
 install:
 	gem install crypto_tracker-0.1.0.gem
+
+uninstall:
+	gem uninstall crypto_tracker
