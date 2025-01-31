@@ -37,9 +37,10 @@ module CryptoTracker
         raise ArgumentError, "Moeda '#{coin}' não é suportada pela API CoinGecko."
       end
 
-      unless CryptoTracker::SUPPORTED_CURRENCIES.include?(currency)
-        raise ArgumentError, "Moeda '#{currency}' não é suportada. Opções: #{CryptoTracker::SUPPORTED_CURRENCIES.join(', ')}"
-      end
+      return if CryptoTracker::SUPPORTED_CURRENCIES.include?(currency)
+
+      raise ArgumentError,
+            "Moeda '#{currency}' não é suportada. Opções: #{CryptoTracker::SUPPORTED_CURRENCIES.join(', ')}"
     end
   end
 end
