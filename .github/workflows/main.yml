@@ -44,7 +44,7 @@ jobs:
         run: bundle exec rake
 
   publish:
-    if: startsWith(github.ref, 'refs/tags/v')  # Só roda em tags
+    if: startsWith(github.ref, 'refs/tags/v')
     needs: build
     runs-on: ubuntu-latest
 
