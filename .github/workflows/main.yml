@@ -64,4 +64,6 @@ jobs:
       - name: Publish on RubyGems
         env:
           GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-        run: gem push crypto_tracker-$(grep -oP '(?<=VERSION = ")([0-9]+\.[0-9]+\.[0-9]+)(?=")' lib/crypto_tracker/version.rb).gem
+        run: |
+          VERSION=$(grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' lib/crypto_tracker/version.rb | head -1)
+          gem push crypto_tracker-$VERSION.gem
